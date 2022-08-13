@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Oembed Test</title>
+</head>
+<link rel="stylesheet" href="css/home.css" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/home.js" ></script>
+<body>
+<div class="container">
+    <header>
+        <div id="title">oEmbed Test</div>
+
+        <div id="input_Box">
+            <input type="text" placeholder="url을 입력해주세요" id="urlText"/>
+            <input type="button" value="확인" onclick="dataSend()"/>
+        </div>
+    </header>
+    <article>
+        <div id="content_wrap" >
+            <th:block th:if="${error == 'error'}">
+                <script>
+                    alert("유효하지 않은 주소입니다.")
+                </script>
+            </th:block>
+
+            <th:block th:if="${oembedRes != null}">
+                <div id="title_container">
+                    <div th:if="${oembedRes?.title != null}">
+                        <div>title</div>
+                        <div th:text="${oembedRes?.title}"></div>
+                    </div>
+                </div>
+                <ul id="responseDataInContainer">
+                    <li th:if="${oembedRes?.type != null}">
+                        <div>type</div>
+                        <div th:text="${oembedRes?.type}"/>
+                    </li>
+                    <li th:if="${oembedRes?.version != null}">
+                        <div>version</div>
+                        <div th:text="${oembedRes?.version}"/>
+                    </li>
+                    <li th:if="${oembedRes?.providerName != null}">
+                        <div>provider_name</div>
+                        <div th:text="${oembedRes?.providerName}"/>
+                    </li>
+                    <li th:if="${oembedRes?.providerUrl != null}">
+                        <div>provider_url</div>
+                        <div>
+                            <a th:href="${oembedRes?.providerUrl}">
+                                <th:block th:text="${oembedRes?.providerUrl}"/>
+                            </a>
+                        </div>
+                    </li>
+                    <li th:if="${oembedRes?.authorName != null}">
+                        <div>author_name</div>
+                        <div th:text="${oembedRes?.authorName}"/>
+                    </li>
+                    <li th:if="${oembedRes?.authorUrl != null}">
+                        <div>author_url</div>
+                        <div>
+                            <a th:href="${oembedRes?.authorUrl}">
+                                <th:block th:text="${oembedRes?.authorUrl}"/>
+                            </a>
+                        </div>
+                    </li>
+                    <li th:if="${oembedRes?.isPlus != null}">
+                        <div>is_plus</div>
+                        <div th:text="${oembedRes?.isPlus}"/>
+                    </li>
+                    <li th:if="${oembedRes?.html != null}">
+                        <div>html<br>
+                            <th:block th:text="${oembedRes?.width}"/>
+                            /
+                            <th:block th:text="${oembedRes?.height}"/>
+                        </div>
+                        <div >
+                            <th:block th:text="${oembedRes?.html}"/><br><br>
+                            <th:block th:utext="${oembedRes?.html}"/>
+                        </div>
+                    </li>
+                    <li th:if="${oembedRes?.width != null}">
+                        <div>width</div>
+                        <div th:text="${oembedRes?.width}"/>
+                    </li>
+                    <li th:if="${oembedRes?.height != null}">
+                        <div>height</div>
+                        <div th:text="${oembedRes?.height}"/>
+                    </li>
+                    <li th:if="${oembedRes?.duration != null}">
+                        <div>duration</div>
+                        <div th:text="${oembedRes?.duration}"/>
+                    </li>
+                    <li th:if="${oembedRes?.description != null}">
+                        <div>description</div>
+                        <div th:text="${oembedRes?.description}"/>
+                    </li>
+                    <li th:if="${oembedRes?.thumbnailUrl != null}">
+                        <div>thumbnail_url<br>
+                            <th:block th:text="${oembedRes?.thumbnailWidth}"/>
+                            /
+                            <th:block th:text="${oembedRes?.thumbnailHeight}"/>
+                        </div>
+                        <div>
+                            <a th:href="${oembedRes?.thumbnailUrl}">
+                                <th:block th:text="${oembedRes?.thumbnailUrl}"/>
+                            </a> <br><br>
+                            <img th:src="${oembedRes?.thumbnailUrl}"/>
+                        </div>
+                    </li>
+                    <li th:if="${oembedRes?.thumbnailWidth != null}">
+                        <div>thumbnail_width</div>
+                        <div th:text="${oembedRes?.thumbnailWidth}"/>
+                    </li>
+                    <li th:if="${oembedRes?.thumbnailHeight != null}">
+                        <div>thumbnail_height</div>
+                        <div th:text="${oembedRes?.thumbnailHeight}"/>
+                    </li>
+                    <li th:if="${oembedRes?.thumbnailUrlWithPlayButton != null}">
+                        <div>thumbnail_url_with_play_button</div>
+                        <div>
+                            <a th:href="${oembedRes?.thumbnailUrlWithPlayButton}">
+                                <th:block th:text="${oembedRes?.thumbnailUrlWithPlayButton}"/>
+                            </a>
+                        </div>
+                    </li>
+                    <li th:if="${oembedRes?.uploadDate != null}">
+                        <div>upload_date</div>
+                        <div th:text="${oembedRes?.uploadDate}"/>
+                    </li>
+                    <li th:if="${oembedRes?.videoId != null}">
+                        <div>video_id</div>
+                        <div th:text="${oembedRes?.videoId}"/>
+                    </li>
+                    <li th:if="${oembedRes?.uri != null}">
+                        <div>uri</div>
+                        <div th:text="${oembedRes?.uri}"/>
+                    </li>
+                    <li th:if="${oembedRes?.cacheAge != null}">
+                        <div>cache_age</div>
+                        <div th:text="${oembedRes?.cacheAge}"/>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+    </article>
+</div>
+
+<!-- /container -->
+</body>
+</html>
